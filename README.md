@@ -1,2 +1,2 @@
-# graphgl_apollo
-project research graphgl
+# graphql_apollo
+project research graphql
