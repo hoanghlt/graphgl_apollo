@@ -11,7 +11,8 @@ const mongoDataMethods = require('./data/db')
 
 const connectDb = async () => {
   try{
-    await mongoose.createConnection('mongodb+srv://hoangvt:Hoang2153@graphql.7cyetxe.mongodb.net/?retryWrites=true&w=majority').asPromise();
+    await mongoose.connect('mongodb+srv://hoangvt:Hoang2153@graphql.7cyetxe.mongodb.net/GraphQL?retryWrites=true&w=majority');
+
     console.log('Connected to database')
   } catch (error){
     console.log(error.message)
