@@ -1,13 +1,32 @@
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
+const mongoose = require('mongoose')
 
 //Load schema & resolvers
 const typeDefs = require('./schema/schema')
 const resolvers = require('./resolvers/resolvers')
 
+//Load mongoDataMethods
+const mongoDataMethods = require('./data/db')
+
+const connectDb = async () => {
+  try{
+    await mongoose.createConnection('mongodb+srv://hoangvt:Hoang2153@graphql.7cyetxe.mongodb.net/?retryWrites=true&w=majority').asPromise();
+    console.log('Connected to database')
+  } catch (error){
+    console.log(error.message)
+    process.exit(1)
+  }
+}
+
+connectDb()
+
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: () => ({
+      mongoDataMethods
+    })
 })
 
 const app = express();
